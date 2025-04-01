@@ -1,0 +1,135 @@
+definitions:
+  storage.Person:
+    properties:
+      age:
+        example: 35
+        type: integer
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Bill
+        type: string
+      nationality:
+        example: US
+        type: string
+      patronymic:
+        example: Bob
+        type: string
+      sex:
+        example: male
+        type: string
+      surname:
+        example: Jay
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /:
+    get:
+      description: Retrieves a list of persons with optional filtering and pagination
+      parameters:
+      - description: Filter by name
+        in: query
+        name: name
+        type: string
+      - description: 'Number of items per page (default: all)'
+        in: query
+        name: limit
+        type: integer
+      - description: 'Offset for pagination (default: 0)'
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/storage.Person'
+              type: array
+            type: array
+        "500":
+          description: Failed to get data
+      summary: Get filtered and paginated list of persons
+      tags:
+      - person
+    post:
+      consumes:
+      - application/json
+      description: Creates a new person record
+      parameters:
+      - description: Person data to create
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/storage.Person'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/storage.Person'
+        "400":
+          description: Invalid JSON
+        "500":
+          description: Failed to create person
+      summary: Create a new person
+      tags:
+      - person
+  /{id}:
+    delete:
+      description: Deletes a person by ID
+      parameters:
+      - description: Person ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid ID
+        "500":
+          description: Failed to delete person
+      summary: Delete a person
+      tags:
+      - person
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing person by ID
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated person data
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/storage.Person'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/storage.Person'
+        "400":
+          description: Invalid ID
+        "500":
+          description: Failed to update person
+      summary: Update a person
+      tags:
+      - person
+swagger: "2.0"

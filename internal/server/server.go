@@ -5,6 +5,9 @@ import (
 	"net"
 	"net/http"
 
+	httpSwagger "github.com/swaggo/http-swagger"
+
+	_ "github.com/fevse/effm/docs"
 	"github.com/fevse/effm/internal/app"
 )
 
@@ -29,6 +32,7 @@ func (s *Server) Start(ctx context.Context) error {
 	mux.Handle("POST /", s.Create())
 	mux.Handle("DELETE /{id}", s.Delete())
 	mux.Handle("PUT /{id}", s.Update())
+	mux.Handle("GET /swagger/", httpSwagger.WrapHandler)
 
 	s.server.Handler = mux
 

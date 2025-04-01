@@ -1,0 +1,204 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Retrieves a list of persons with optional filtering and pagination",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "person"
+                ],
+                "summary": "Get filtered and paginated list of persons",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of items per page (default: all)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset for pagination (default: 0)",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/storage.Person"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get data"
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new person record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "person"
+                ],
+                "summary": "Create a new person",
+                "parameters": [
+                    {
+                        "description": "Person data to create",
+                        "name": "person",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/storage.Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/storage.Person"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON"
+                    },
+                    "500": {
+                        "description": "Failed to create person"
+                    }
+                }
+            }
+        },
+        "/{id}": {
+            "put": {
+                "description": "Updates an existing person by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "person"
+                ],
+                "summary": "Update a person",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated person data",
+                        "name": "person",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/storage.Person"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/storage.Person"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID"
+                    },
+                    "500": {
+                        "description": "Failed to update person"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a person by ID",
+                "tags": [
+                    "person"
+                ],
+                "summary": "Delete a person",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Person ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Invalid ID"
+                    },
+                    "500": {
+                        "description": "Failed to delete person"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "storage.Person": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "example": 35
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Bill"
+                },
+                "nationality": {
+                    "type": "string",
+                    "example": "US"
+                },
+                "patronymic": {
+                    "type": "string",
+                    "example": "Bob"
+                },
+                "sex": {
+                    "type": "string",
+                    "example": "male"
+                },
+                "surname": {
+                    "type": "string",
+                    "example": "Jay"
+                }
+            }
+        }
+    }
+}
