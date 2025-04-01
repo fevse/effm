@@ -105,6 +105,7 @@ func (s *Storage) Show(filter map[string]string, limit, offset int) ([]Person, e
 }
 
 func (s *Storage) Delete(id int) error {
+
 	query := `DELETE FROM people WHERE id = $1`
 	_, err := s.db.Exec(query, id)
 	if err != nil {

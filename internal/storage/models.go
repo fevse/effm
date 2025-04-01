@@ -1,13 +1,13 @@
 package storage
 
 type Person struct {
-	ID          int    `json:"id,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Surname     string `json:"surname,omitempty"`
-	Patronymic  string `json:"patronymic,omitempty"`
-	Age         int    `json:"age,omitempty"`
-	Sex         string `json:"sex,omitempty"`
-	Nationality string `json:"nationality,omitempty"`
+	ID          int    `json:"id,omitempty" example:"1"`
+	Name        string `json:"name,omitempty" example:"Bill"`
+	Surname     string `json:"surname,omitempty" example:"Jay"`
+	Patronymic  string `json:"patronymic,omitempty" example:"Bob"`
+	Age         int    `json:"age,omitempty" example:"35"`
+	Sex         string `json:"sex,omitempty" example:"male"`
+	Nationality string `json:"nationality,omitempty" example:"US"`
 }
 
 type Age struct {

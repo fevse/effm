@@ -11,6 +11,10 @@ CREATE TABLE IF NOT EXISTS people (
 );
 -- +goose StatementEnd
 -- +goose StatementBegin
+CREATE INDEX name_surname
+ON people (name, surname);
+-- +goose StatementEnd
+-- +goose StatementBegin
 INSERT INTO people (name, surname)
 VALUES ('Daria', 'Morgendorffer'),
 ('Jane', 'Lane');
