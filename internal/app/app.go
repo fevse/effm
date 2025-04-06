@@ -4,12 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/fevse/effm/internal/config"
 	"github.com/fevse/effm/internal/storage"
 )
 
 type EffmApp struct {
 	Storage Storage
 	Logger  Logger
+	Config  *config.Config
 }
 
 type Storage interface {
@@ -25,10 +27,11 @@ type Logger interface {
 	Error(string)
 }
 
-func NewEffmApp(storage Storage, logger Logger) *EffmApp {
+func NewEffmApp(config *config.Config, storage Storage, logger Logger) *EffmApp {
 	return &EffmApp{
 		Storage: storage,
 		Logger:  logger,
+		Config:  config,
 	}
 }
 
@@ -42,7 +45,7 @@ func (e *EffmApp) Create(person *storage.Person) error {
 	nationality := storage.Nationality{}
 	name := person.Name
 
-	resp, err := http.Get("https://api.agify.io/?name=" + name)
+	resp, err := http.Get(e.Config.APIAge + name)
 	if err != nil {
 		return err
 	}
@@ -50,7 +53,7 @@ func (e *EffmApp) Create(person *storage.Person) error {
 		return err
 	}
 
-	resp, err = http.Get("https://api.genderize.io/?name=" + name)
+	resp, err = http.Get(e.Config.APISex + name)
 	if err != nil {
 		return err
 	}
@@ -58,7 +61,7 @@ func (e *EffmApp) Create(person *storage.Person) error {
 		return err
 	}
 
-	resp, err = http.Get("https://api.nationalize.io/?name=" + name)
+	resp, err = http.Get(e.Config.APINationality + name)
 	if err != nil {
 		return err
 	}

@@ -35,7 +35,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	app := app.NewEffmApp(storage, logger)
+	app := app.NewEffmApp(config, storage, logger)
 
 	server := server.NewServer(app, config.ServHost, config.ServPort)
 

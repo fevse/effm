@@ -9,14 +9,17 @@ import (
 )
 
 type Config struct {
-	LogLevel   string
-	ServHost   string
-	ServPort   string
-	DBHost     string
-	DBPort     string
-	DBUser     string
-	DBPassword string
-	DBName     string
+	LogLevel       string
+	ServHost       string
+	ServPort       string
+	DBHost         string
+	DBPort         string
+	DBUser         string
+	DBPassword     string
+	DBName         string
+	APIAge         string
+	APISex         string
+	APINationality string
 }
 
 func LoadConfig() *Config {
@@ -26,14 +29,17 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		LogLevel:   os.Getenv("LOG_LEVEL"),
-		ServHost:   os.Getenv("SERV_HOST"),
-		ServPort:   os.Getenv("SERV_PORT"),
-		DBHost:     os.Getenv("DB_HOST"),
-		DBPort:     os.Getenv("DB_PORT"),
-		DBUser:     os.Getenv("DB_USER"),
-		DBPassword: os.Getenv("DB_PASSWORD"),
-		DBName:     os.Getenv("DB_NAME"),
+		LogLevel:       os.Getenv("LOG_LEVEL"),
+		ServHost:       os.Getenv("SERV_HOST"),
+		ServPort:       os.Getenv("SERV_PORT"),
+		DBHost:         os.Getenv("DB_HOST"),
+		DBPort:         os.Getenv("DB_PORT"),
+		DBUser:         os.Getenv("DB_USER"),
+		DBPassword:     os.Getenv("DB_PASSWORD"),
+		DBName:         os.Getenv("DB_NAME"),
+		APIAge:         os.Getenv("API_AGE"),
+		APISex:         os.Getenv("API_SEX"),
+		APINationality: os.Getenv("API_NATIONALITY"),
 	}
 }
 
