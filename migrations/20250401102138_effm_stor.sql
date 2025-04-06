@@ -14,15 +14,6 @@ CREATE TABLE IF NOT EXISTS people (
 CREATE INDEX name_surname
 ON people (name, surname);
 -- +goose StatementEnd
--- +goose StatementBegin
-INSERT INTO people (name, surname)
-VALUES ('Daria', 'Morgendorffer'),
-('Jane', 'Lane');
--- +goose StatementEnd
--- +goose StatementBegin
-INSERT INTO people (name, surname, patronymic)
-VALUES ('Bender', 'Rodriguez', 'Bending');
--- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
